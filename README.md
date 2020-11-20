@@ -1,2 +1,3 @@
-# gs-wad-api-labs-2020
-Web dev labs for 2020. 
+# Web App Dev 2: Web API Labs
+
+Practical labs for the WAD2 module, BSc. Applied/Software Systems Dev/Forensics  

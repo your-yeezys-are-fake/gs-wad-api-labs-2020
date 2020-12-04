@@ -1,9 +1,9 @@
-import mongoose from 'mongoose';
+import mongoose, { isValidObjectId } from 'mongoose';
 
 const Schema = mongoose.Schema;
 
 const MovieSchema = new Schema({
-    id: {type: String, unique: true, required: true},
+    id: {type: String, unique: false, required: true, index: true, sparse: true},
     title:{type: String, required: true}
   });
   

@@ -1,4 +1,5 @@
 import userModel from '../api/users/userModel';
+import genreModel from '../api/genres/genreModel';
 
 const users = [
   {
@@ -11,6 +12,15 @@ const users = [
   },
 ];
 
+const genres = [
+    {
+    'title': 'action'
+},
+
+{'title' : 'comedy'
+}
+];
+
 // deletes all user documents in collection and inserts test data
 export async function loadUsers() {
   console.log('load user Data');
@@ -21,4 +31,16 @@ export async function loadUsers() {
     } catch (err) {
       console.error(`failed to Load user Data: ${err}`);
     }
-  }
+};
+
+  export async function loadGenres() {
+    console.log('load genre Data');
+      try {
+        await genreModel.deleteMany();
+        await genreModel.collection.insertMany(genres);
+        console.info(`${genres.length} genres were successfully stored.`);
+      } catch (err) {
+        console.error(`failed to Load genre Data: ${err}`);
+      }
+    }
+    

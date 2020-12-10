@@ -1,15 +1,23 @@
 import dotenv from 'dotenv';
 import express from 'express';
+import session from 'express-session';
+import authenticate from './authenticate';
 import moviesRouter from './api/movies';
 import bodyParser from 'body-parser';
 import './db';
 import {loadUsers} from './seedData'
+import {loadGenres} from './seedData'
 import usersRouter from './api/users';
+import genreRouter from './api/genres';
 
 dotenv.config();
 
 if (process.env.SEED_DB) {
   loadUsers();
+}
+
+if (process.env.SEED_DB) {
+  loadGenres();
 }
 
 const errHandler = (err, req, res, next) => {
@@ -25,12 +33,19 @@ const app = express();
 
 const port = process.env.PORT;
 
+app.use(session({
+  secret: 'ilikecake',
+  resave: true,
+  saveUninitialized: true
+}));
+
 //configure body-parser
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use('/api/movies', moviesRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/genres', genreRouter);
 app.use(errHandler);
 
 app.listen(port, () => {

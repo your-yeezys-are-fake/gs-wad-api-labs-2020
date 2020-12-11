@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import session from 'express-session';
-import authenticate from './authenticate';
+import passport from './authenticate';
 import moviesRouter from './api/movies';
 import bodyParser from 'body-parser';
 import './db';
@@ -44,7 +44,8 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }));
-app.use('/api/movies', moviesRouter);
+app.use(passport.initialize())
+app.use('/api/movies', passport.authenticate('jwt', {session: false}), moviesRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/genres', genreRouter);
 app.use(errHandler);

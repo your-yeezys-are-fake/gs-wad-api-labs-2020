@@ -6,12 +6,14 @@ import {
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-  movieModel.find().then(movies => res.status(200).send(movies)).catch(next);
+  getMovies()
+  .then(movies => res.status(200).send(movies)).catch(next);
 });
 
 router.get('/:id', (req, res, next) => {
   const id = parseInt(req.params.id);
-  movieModel.findByMovieDBId(id).then(movie => res.status(200).send(movie)).catch(next);
+  getMovie(id)
+  .then(movie => res.status(200).send(movie)).catch(next);
 });
 
 router.get('/:id/reviews', (req, res, next) => {

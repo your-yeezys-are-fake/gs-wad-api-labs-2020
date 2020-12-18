@@ -1,12 +1,22 @@
 import express from 'express';
 import {
-  getMovies, getMovie, getMovieReviews, getMovieCredits
+  getMovies, getMovie, getMovieReviews, getMovieCredits, getUpcomingMovies, getNowPlayingMovies
 } from '../tmdb-api';
 
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
   getMovies()
+  .then(movies => res.status(200).send(movies)).catch(next);
+});
+
+router.get('/upcoming', (req, res, next) => {
+  getUpcomingMovies()
+  .then(movies => res.status(200).send(movies)).catch(next);
+});
+
+router.get('/now_playing', (req, res, next) => {
+  getNowPlayingMovies()
   .then(movies => res.status(200).send(movies)).catch(next);
 });
 

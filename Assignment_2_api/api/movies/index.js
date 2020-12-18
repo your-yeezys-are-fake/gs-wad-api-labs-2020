@@ -1,6 +1,6 @@
 import express from 'express';
 import {
-  getMovies, getMovie, getMovieReviews
+  getMovies, getMovie, getMovieReviews, getMovieCredits
 } from '../tmdb-api';
 
 const router = express.Router();
@@ -20,5 +20,13 @@ router.get('/:id/reviews', (req, res, next) => {
   .then(reviews => res.status(200).send(reviews))
   .catch((error) => next(error));
 });
+
+router.get('/:id/credits', (req, res, next) => {
+  const id = parseInt(req.params.id);
+  getMovieCredits(id)
+  .then(credits => res.status(200).send(credits))
+  .catch((error) => next(error));
+  
+})
 
 export default router;

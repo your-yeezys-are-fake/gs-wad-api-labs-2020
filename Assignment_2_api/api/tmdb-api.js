@@ -30,9 +30,9 @@ export const getMovies = () => {
 
   export const getUpcomingMovies = () => {
     return fetch(
-      `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}&region=US`
+      `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
     )
-      .then(res => res.json())
+      .then(res => res.json());
      
   };
 
@@ -64,6 +64,7 @@ export const getMovies = () => {
     return fetch(
       `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`
     )
-      .then(res => res.json())
+      .then(res => res.json());
+      
       
   };

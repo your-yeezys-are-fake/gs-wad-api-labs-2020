@@ -10,6 +10,8 @@ import {loadGenres} from './seedData';
 import {loadMovies} from './seedData';
 import usersRouter from './api/users';
 import genreRouter from './api/genres';
+const helmet = require('helmet');
+const morgan = require('morgan');
 
 dotenv.config();
 
@@ -38,16 +40,18 @@ const port = process.env.PORT;
 
 
 //configure body-parser
+app.use(helmet());
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-//app.use(session({
-  //secret: 'ilikecake',
-  //resave: true,
-  //saveUninitialized: true
-//}));
-//app.use(passport.initialize())
-app.use('/api/movies',moviesRouter); //passport.authenticate('jwt', {session: false})//
+app.use(morgan('tiny'));
+app.use(session({
+  secret: 'ilikecake',
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(passport.initialize())
+app.use('/api/movies',moviesRouter, passport.authenticate('jwt', {session: false}));//
 app.use('/api/users', usersRouter);
 app.use('/api/genres', genreRouter);
 app.use(errHandler);

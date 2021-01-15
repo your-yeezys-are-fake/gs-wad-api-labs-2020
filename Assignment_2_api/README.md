@@ -71,6 +71,6 @@ I integrated my React app with the API by including a proxy to localhost 8080 in
 
 + Feature 1 - Installation and use of Morgan and Helmet for API security and logging. 
 
-## Independent learning.
+## Independent learning..
 
 + Configuration of Morgan referenced from: https://www.digitalocean.com/community/tutorials/nodejs-getting-started-morgan

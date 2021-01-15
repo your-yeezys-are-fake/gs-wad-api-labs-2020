@@ -43,30 +43,34 @@ REACT_APP_TMDB_KEY= yourTMDBKey
 | ... | ... | ... | ... | ...
 
 ## Security and Authentication
-Give details of authentication/ security implemented on the API(e.g. passport/sessions). Indicate which routes are protected.
+
++ Feature 1 - Implementation of Helmet for API Security
++ Feature 2- Implementation of JWTs
++ Feature 3 - Implementation of Passports
++ Feature 4 - Full review route is Protected (requires sign in of valid account to view)
 
 ## Integrating with React App
 
-Describe how you integrated your React app with the API. Perhaps link to the React App repo and give an example of an API call from React App. For example: 
+I integrated my React app with the API by including a proxy to localhost 8080 in the package.json file. To retrieve data from the API, I replaced the fetch portion of the get method with a path to the required method in the new API instead of the previously used direct TMDB API link. 
 
 ~~~Javascript
-export const getMovies = () => {
-  return fetch(
-     '/api/movies',{headers: {
-       'Authorization': window.localStorage.getItem('token')
-    }
-  }
-  )
-    .then(res => res.json())
-    .then(json => {return json.results;});
-};
+ export const getPopularMovies = () => {
+    return fetch(
+      `/api/movies/popular`,{headers: {
+        'Authorization': window.localStorage.getItem('token')
+     }
+   }
+    )
+      .then(res => res.json())
+      .then(json => json.results);
+  };
 
 ~~~
 
 ## Extra features
 
-. . Briefly explain any non-standard features, functional or non-functional, developed for the app.  
++ Feature 1 - Installation and use of Morgan and Helmet for API security and logging. 
 
 ## Independent learning.
 
-. . State the non-standard aspects of React/Express/Node (or other related technologies) that you researched and applied in this assignment . .  
++ Configuration of Morgan referenced from: https://www.digitalocean.com/community/tutorials/nodejs-getting-started-morgan

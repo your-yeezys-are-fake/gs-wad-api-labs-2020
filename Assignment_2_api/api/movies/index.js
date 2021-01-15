@@ -54,7 +54,7 @@ router.get('/:id/credits', (req, res, next) => {
 router.post('/:id/review', async (req, res, next) =>{
   const newReview = req.body.id;
   const movie = await movieModel.findByMovieDBId(newReview);
-  await movie.id.push(review);
+  await movie.id.push (review); //not working yet
   await movie.save(); 
   res.status(201).json(user); 
 })
